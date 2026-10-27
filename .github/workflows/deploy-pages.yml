@@ -1,4 +1,4 @@
-name: Deploy static web app to GitHub Pages
+﻿name: Deploy static web app to GitHub Pages
 
 on:
   push:
@@ -21,7 +21,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Configure Pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v5`r`n        with:`r`n          enablement: true
       - name: Verify static app entry points
         run: |
           test -f index.html
@@ -45,3 +45,4 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+

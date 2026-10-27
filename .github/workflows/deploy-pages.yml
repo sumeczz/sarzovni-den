@@ -21,7 +21,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Configure Pages
-        uses: actions/configure-pages@v5`r`n        with:`r`n          enablement: true
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
       - name: Verify static app entry points
         run: |
           test -f index.html
@@ -45,4 +47,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-

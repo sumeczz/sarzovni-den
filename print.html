@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="cs">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <title>Tisk čárového kódu · Šaržovní den</title>
+    <link rel="stylesheet" href="css/print.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="header-main">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">Š</span>
+          <div>
+            <p class="eyebrow">TISKOVÉ CENTRUM</p>
+            <h1>Tisk čárových kódů</h1>
+          </div>
+        </div>
+        <p class="code" id="code"></p>
+        <div class="header-actions">
+          <button type="button" class="button ghost" id="back">← Zpět</button>
+          <button type="button" class="button primary" id="print">Tisk</button>
+        </div>
+      </div>
+      <p class="info" id="info"></p>
+    </header>
+
+    <div class="layout">
+      <aside class="settings" aria-label="Nastavení tisku">
+        <section class="settings-card">
+          <h2>Papír a stránka</h2>
+          <label class="field">
+            <span>Formát papíru</span>
+            <select id="paper-size">
+              <option value="a4">A4 · 210 × 297 mm</option>
+              <option value="a5">A5 · 148 × 210 mm</option>
+              <option value="a6">A6 · 105 × 148 mm</option>
+              <option value="letter">Letter · 215,9 × 279,4 mm</option>
+              <option value="custom">Vlastní formát</option>
+            </select>
+          </label>
+          <div class="two-fields" id="paper-custom" hidden>
+            <label class="field"><span>Šířka papíru (mm)</span><input id="paper-width" type="number" min="20" max="1000" step="1" /></label>
+            <label class="field"><span>Výška papíru (mm)</span><input id="paper-height" type="number" min="20" max="1000" step="1" /></label>
+          </div>
+          <div class="two-fields">
+            <label class="field">
+              <span>Orientace</span>
+              <select id="orientation">
+                <option value="portrait">Na výšku</option>
+                <option value="landscape">Na šířku</option>
+              </select>
+            </label>
+            <label class="field"><span>Okraj stránky (mm)</span><input id="page-margin" type="number" min="0" max="50" step="0.5" /></label>
+          </div>
+          <label class="field">
+            <span>Režim tisku</span>
+            <select id="print-mode">
+              <option value="auto">Automaticky · 1 kus = štítek, více = papír</option>
+              <option value="paper">Vždy na zvolený papír</option>
+              <option value="label">Vždy stránka o velikosti štítku</option>
+            </select>
+          </label>
+        </section>
+
+        <section class="settings-card">
+          <h2>Štítek</h2>
+          <div class="two-fields">
+            <label class="field"><span>Šířka štítku (mm)</span><input id="width" type="number" min="20" max="200" step="1" /></label>
+            <label class="field"><span>Výška štítku (mm)</span><input id="height" type="number" min="8" max="1000" step="0.5" placeholder="auto" /></label>
+          </div>
+          <div class="presets" id="presets" aria-label="Rychlé šířky štítku"></div>
+          <div class="two-fields">
+            <label class="field"><span>Kusů na kód</span><input id="copies" type="number" min="1" max="200" step="1" /></label>
+            <label class="field"><span>Mezera mezi štítky (mm)</span><input id="label-gap" type="number" min="0" max="50" step="0.5" /></label>
+          </div>
+          <div class="two-fields">
+            <label class="field"><span>Sloupce (0 = automaticky)</span><input id="columns" type="number" min="0" max="20" step="1" /></label>
+            <label class="field"><span>Výška pruhů (mm)</span><input id="bar-height" type="number" min="4" max="300" step="0.5" placeholder="auto" /></label>
+          </div>
+          <div class="two-fields">
+            <label class="field"><span>Velikost textu (mm)</span><input id="text-size" type="number" min="1.2" max="50" step="0.1" placeholder="auto" /></label>
+            <label class="field">
+              <span>Zarovnání textu</span>
+              <select id="text-align">
+                <option value="left">Vlevo</option>
+                <option value="center">Na střed</option>
+                <option value="right">Vpravo</option>
+              </select>
+            </label>
+          </div>
+          <label class="check-line"><input id="show-text" type="checkbox" checked /> Zobrazit text pod kódem</label>
+          <label class="check-line"><input id="show-outlines" type="checkbox" checked /> Ořezové čáry v náhledu</label>
+          <button type="button" class="button ghost full" id="fix-width" hidden></button>
+          <button type="button" class="button ghost full" id="reset-layout">Obnovit výchozí rozložení</button>
+        </section>
+
+        <section class="settings-card" id="manual-card" hidden>
+          <h2>Ruční zadání</h2>
+          <label class="field">
+            <span>Verze (oddělené mezerou)</span>
+            <input id="manual-versions" type="text" placeholder="12472A 12472B" autocomplete="off" spellcheck="false" />
+          </label>
+          <p class="hint">Enter sestaví kódy z dnešního data.</p>
+        </section>
+      </aside>
+
+      <main class="workspace">
+        <section class="editor-card">
+          <div class="card-head">
+            <div>
+              <span class="kicker">EDITOR ŠTÍTKU</span>
+              <h2>Přesuň prvky a zarovnej je</h2>
+            </div>
+            <div class="element-switch" role="group" aria-label="Vybrat prvek">
+              <button type="button" class="chip is-active" data-part="barcode">Čárový kód</button>
+              <button type="button" class="chip" data-part="text">Text</button>
+            </div>
+          </div>
+          <div class="align-bar">
+            <span class="align-label">Vodorovně</span>
+            <button type="button" class="align-btn" data-axis="x" data-align="left">Vlevo</button>
+            <button type="button" class="align-btn" data-axis="x" data-align="center">Střed</button>
+            <button type="button" class="align-btn" data-axis="x" data-align="right">Vpravo</button>
+            <span class="align-label">Svisle</span>
+            <button type="button" class="align-btn" data-axis="y" data-align="top">Nahoru</button>
+            <button type="button" class="align-btn" data-axis="y" data-align="center">Střed</button>
+            <button type="button" class="align-btn" data-axis="y" data-align="bottom">Dolů</button>
+          </div>
+          <div class="editor-stage" id="editor-stage">
+            <div class="editor-wrap" id="editor-label-wrap"><div class="label editor-label" id="editor-label"></div></div>
+          </div>
+          <p class="hint">Přetáhni čárový kód nebo text přímo v náhledu. Poloha se zaokrouhluje na 0,5 mm.</p>
+        </section>
+
+        <section class="pages-card">
+          <div class="card-head">
+            <div>
+              <span class="kicker">NÁHLED TISKU</span>
+              <h2 id="page-caption">Náhled</h2>
+            </div>
+            <span class="pill" id="page-size-pill"></span>
+          </div>
+          <div class="pages" id="pages"></div>
+          <p class="note" id="note"></p>
+        </section>
+      </main>
+    </div>
+
+    <style id="page-rule"></style>
+    <script type="module" src="js/print.js"></script>
+  </body>
+</html>

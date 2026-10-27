@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <title>Návrhář štítků · Šaržovní den 1.4.0</title>
+  <link rel="stylesheet" href="css/workbench.css">
+  <link rel="stylesheet" href="css/workbench-extra.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="index.html" title="Zpět na hlavní generátor"><span class="brand-icon">Š</span><span><strong>Šaržovní den</strong><small>PRODUKČNÍ NÁSTROJE</small></span></a>
+      <div class="topbar-center"><span class="eyebrow">DATABÁZE / 01</span><h1>Import dat</h1><p>Volitelná databáze pro dávkové generování kódů. Vše zůstává lokálně v prohlížeči.</p></div>
+      <a class="back-link" href="index.html">← Hlavní generátor</a>
+    </header>
+
+    <nav class="workflow" aria-label="Postup práce">
+      <button class="workflow-step active" type="button" data-view="import"><span>01</span><b>Import dat</b><small>Databáze pro dávkové kódy</small></button>
+    </nav>
+
+    <main>
+      <section class="view" id="view-import">
+        <div class="view-heading"><div><span class="kicker">DATA INTAKE</span><h2>Načti tabulku ze SAPu nebo Excelu</h2><p>Podporuje kopírování tabulek z SAP GUI / Fiori, Excelu a soubory CSV, TSV, TXT i moderní XLSX. Sloupce namapuješ ručně, pokud automatické rozpoznání nestačí.</p></div><button class="button ghost" id="load-sample">Vyzkoušet ukázkový SAP export</button></div>
+        <div class="import-grid">
+          <section class="panel source-panel">
+            <div class="panel-head"><div class="step-number">A</div><div><h3>Vstupní data</h3><p>Nejrychlejší cesta: vyber tabulku v SAPu/Excelu, Ctrl+C a vlož sem.</p></div></div>
+            <label class="sr-only" for="source-text">Vložená tabulka</label>
+            <textarea id="source-text" spellcheck="false" placeholder="Vlož sem tabulku z SAP ALV / Fiori nebo Excelu…&#10;&#10;Material&#9;Material Description&#9;Vendor Batch&#9;Batch&#9;Plant&#9;Storage Location&#9;Quantity&#9;UoM&#10;0000123456&#9;Plech 0,8 mm&#9;12472A&#9;B260019&#9;1100&#9;0001&#9;250&#9;KG"></textarea>
+            <div class="source-actions"><label class="button ghost file-button" for="source-file">Načíst soubor…<input id="source-file" type="file" accept=".csv,.tsv,.txt,.xlsx,.xlsm,text/csv,text/plain,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" hidden></label><label class="delimiter-control"><span>Oddělovač</span><select id="delimiter"><option value="auto">Automaticky</option><option value="\t">Tabulátor · SAP / Excel</option><option value=";">Středník · CZ CSV</option><option value=",">Čárka · CSV</option><option value="|">Svislá čára</option><option value="fixed">Textový výpis s mezerami</option></select></label></div>
+            <div class="source-toggles"><label><input type="checkbox" id="header-autodetect" checked> Automaticky rozpoznat hlavičku</label><label><input type="checkbox" id="trim-empty" checked> Přeskočit prázdné řádky a souhrny</label></div>
+            <div class="button-row"><button class="button primary" id="parse-import">Analyzovat a rozpoznat sloupce <span>→</span></button><button class="button" id="clear-import">Vymazat</button></div>
+            <p class="note">Tip: v SAPu označ řádky v tabulkovém přehledu (ALV/Fiori) a zkopíruj je. Zůstane zachováno pořadí sloupců i úvodní nuly, pokud je SAP/Excel poskytuje jako text.</p>
+          </section>
+          <aside class="panel sap-tips">
+            <span class="kicker">SAP IMPORT ENGINE</span><h3>Co zkusí rozpoznat</h3>
+            <div class="tip-row"><span class="tip-icon">↔</span><div><b>Více formátů</b><p>Tabulátor ze SAPu/Excelu, CSV se středníkem nebo čárkou, textový výpis s mezerami i XLSX.</p></div></div>
+            <div class="tip-row"><span class="tip-icon">⌕</span><div><b>Technické názvy SAP polí</b><p>MATNR, MAKTX, WERKS, LGORT, MENGE, MEINS, CHARG, LICHA, VFDAT, EBELN a běžné popisky v češtině, angličtině či němčině.</p></div></div>
+            <div class="tip-row"><span class="tip-icon">!</span><div><b>Bez nebezpečného hádání</b><p>Obecný Batch / CHARG se nikdy automaticky nezamění za Verzi / šarži dodavatele (LICHA). Mapování můžeš upravit.</p></div></div>
+            <div class="privacy-callout"><span>◈</span><span><b>Lokální zpracování</b><small>Soubor se nikam neodesílá. Data zůstávají v tomto okně.</small></span></div>
+          </aside>
+        </div>
+
+        <section class="panel reference-panel" aria-label="Referenční přehled SAP a GS1">
+          <div class="panel-head"><div class="step-number">?</div><div><h3>Referenční přehled importu a GS1</h3><p>Slovník pro ruční mapování a pro tvorbu standardizovaných GS1-128 štítků.</p></div></div>
+          <div class="reference-grid">
+            <details open><summary>Technické názvy SAP polí</summary><p class="note">Každé z těchto polí lze vybrat při mapování i vložit do textu nebo obsahu kódu jako <code>{{nazevPole}}</code>.</p><div class="table-wrap reference-table"><table class="data-table"><thead><tr><th>SAP</th><th>Pole v návrháři</th><th>Význam</th></tr></thead><tbody id="sap-field-reference"></tbody></table></div></details>
+            <details><summary>GS1-128 Application Identifiers</summary><p class="note">Použij formát <code>(01)09506000134352(10)LOT-42(17)270131</code>. Závorky jsou jen pro člověka; návrhář doplní FNC1 a oddělovače pro proměnlivou délku.</p><div class="table-wrap reference-table"><table class="data-table"><thead><tr><th>AI</th><th>Význam</th><th>Formát</th><th>Použití</th></tr></thead><tbody id="gs1-ai-reference"></tbody></table></div></details>
+          </div>
+        </section>
+
+        <section class="panel mapping-panel" id="mapping-panel" hidden>
+          <div class="panel-head"><div class="step-number">B</div><div><h3>Mapování sloupců</h3><p>Porovnej automatický návrh s hlavičkami, které přišly ze SAPu. Každé pole lze ručně změnit.</p></div><span class="pill" id="detect-status">Čeká na import</span></div>
+          <div id="import-warnings" class="notice-list" hidden></div>
+          <div class="mapping-grid" id="mapping-grid"></div>
+          <div class="settings-strip">
+            <label class="field"><span>Co má být hlavním kódem</span><select id="code-mode"><option value="sharnovni">Šaržovní kód (verze + den + rok) — doporučeno</option><option value="barcode">Použít externí čárový kód</option><option value="qr">Použít obsah QR kódu</option></select></label>
+            <label class="field"><span>Datum pro šaržovní kód</span><select id="generation-date-mode"><option value="today">Dnešní datum</option><option value="manual">Zadat datum ručně</option></select></label>
+            <label class="field" id="manual-date-wrap" hidden><span>Datum generování</span><input id="generation-date" type="date"></label>
+          </div>
+          <div class="mapping-footer"><div id="source-stats" class="source-stats">Zatím žádná data.</div><button class="button primary" id="apply-mapping">Použít mapování a připravit štítky →</button></div>
+          <div class="table-wrap"><table class="data-table" id="import-table"><caption>Náhled prvních řádků — po mapování ověř také sloupec Verze.</caption><thead><tr id="import-table-head"></tr></thead><tbody id="import-table-body"></tbody></table></div>
+        </section>
+      </section>
+
+      <section class="view" id="view-design" hidden>
+        <div class="view-heading"><div><span class="kicker">LABEL DESIGNER</span><h2>Navrhni štítek přesně v milimetrech</h2><p>Vyber výchozí rozměr, uprav rozložení a zapni pouze ty údaje, které na štítku potřebuješ. Náhled respektuje reálné rozměry prvků.</p></div><div class="heading-actions"><select id="layout-library" aria-label="Uložené šablony"><option value="">Uložené šablony…</option></select><button class="button ghost" id="save-layout">Uložit šablonu</button><button class="button ghost" id="load-layout">Načíst</button><button class="button ghost" id="reset-layout">Obnovit</button><button class="button primary" id="go-quality">Pokračovat na kontrolu →</button></div></div>
+        <div class="designer-grid">
+          <section class="panel design-controls">
+            <div class="panel-head"><div class="step-number">01</div><div><h3>Rozměr štítku</h3><p>Předvolba nebo vlastní rozměr.</p></div></div>
+            <label class="field"><span>Šablona rozměru</span><select id="label-preset"></select></label>
+            <div class="two-fields"><label class="field"><span>Šířka (mm)</span><input id="label-width-mm" type="number" min="20" max="210" step="0.1" value="104"></label><label class="field"><span>Výška (mm)</span><input id="label-height-mm" type="number" min="20" max="300" step="0.1" value="151.63"></label></div>
+            <div class="panel-separator"></div>
+            <div class="panel-head"><div class="step-number">02</div><div><h3>Prvky štítku</h3><p>Vyber prvek a uprav jeho nastavení.</p></div></div>
+            <div class="element-list" id="element-list"></div>
+            <div class="add-element-row"><select id="new-element-type" aria-label="Typ nového prvku"><option value="text">Textové pole</option><option value="barcode">Čárový kód</option><option value="qr">QR kód</option></select><button id="add-element" class="button ghost">＋ Přidat prvek</button></div>
+            <div class="panel-separator"></div>
+            <div class="panel-head"><div class="step-number">03</div><div><h3>Vlastnosti vybraného prvku</h3><p>Pozice a velikost se zadávají v milimetrech od levého horního rohu.</p></div></div>
+            <div id="element-inspector" class="inspector empty-inspector">Vyber prvek ze seznamu nebo klikni na prvek v náhledu.</div>
+          </section>
+          <section class="panel design-preview-card">
+            <div class="panel-head"><div class="step-number">PREVIEW</div><div><h3>Živý náhled</h3><p id="design-record-caption">Ukázkový záznam</p></div><span class="pill" id="dimension-pill">104 × 151,63 mm</span></div>
+            <div class="preview-stage"><div class="label-canvas-wrap"><div id="label-canvas" class="label-canvas" aria-label="Náhled štítku"></div></div></div>
+            <div class="preview-legend"><span><i class="legend-dot code"></i> Čárový kód</span><span><i class="legend-dot qr"></i> QR kód</span><span><i class="legend-dot text"></i> Textové pole</span></div>
+            <div class="preview-actions"><button class="button" id="preview-previous">← Předchozí záznam</button><span id="preview-index">1 / 1</span><button class="button" id="preview-next">Další záznam →</button></div>
+            <div class="design-note"><b>Pracovní tip:</b> Po importu můžeš prohlédnout konkrétní řádek. Krátký název, dávka i materiál tak zůstávají pod kontrolou před hromadným tiskem.</div>
+          </section>
+        </div>
+      </section>
+
+      <section class="view" id="view-quality" hidden>
+        <div class="view-heading"><div><span class="kicker">PREFLIGHT / PRINT SAFETY</span><h2>Kontrola kvality před tiskem</h2><p>Kontrola dat, kódů, rozměrů, přesahů, duplicit a fyzické velikosti modulů. Kritické chyby blokují tisk.</p></div><button class="button primary" id="run-quality">Spustit kontrolu znovu</button></div>
+        <div class="quality-stats" id="quality-stats"><div class="stat-card"><span>Štítků</span><b id="stat-total">0</b></div><div class="stat-card"><span>Chyby</span><b class="stat-error" id="stat-errors">0</b></div><div class="stat-card"><span>Upozornění</span><b class="stat-warning" id="stat-warnings">0</b></div><div class="stat-card"><span>Stav</span><b id="stat-ready">Čeká</b></div></div>
+        <div class="quality-grid"><section class="panel"><div class="panel-head"><div class="step-number">QC</div><div><h3>Výsledky kontroly</h3><p>Každá položka uvádí řádek, který je potřeba prověřit.</p></div></div><div id="quality-list" class="quality-list"><div class="empty-state">Načti data a spusť kontrolu před tiskem.</div></div></section><aside class="panel quality-side"><span class="kicker">PRINT SETTINGS</span><h3>Výstup</h3><div class="quality-setting"><span>Rozměr stránky</span><b id="print-size-summary">104 × 151,63 mm</b></div><div class="quality-setting"><span>Vzhled</span><b>1 štítek na stránku</b></div><div class="quality-setting"><span>Generování</span><b id="print-mode-summary">Šaržovní kód</b></div><label class="check-line"><input type="checkbox" id="allow-warnings"> Rozumím upozorněním a chci tisknout i s nimi</label><button class="button primary print-button" id="print-labels" disabled>✓ Vytisknout připravené štítky</button><button class="button ghost full-button" id="download-results">Stáhnout kontrolní CSV</button><button class="button ghost full-button" id="download-svg-sheet">Stáhnout arch štítků SVG</button><p class="note">V dialogu tisku ověř tiskárnu, správnou roli štítků a měřítko 100 %. Pro termotisk nastav v ovladači stejný rozměr média.</p></aside></div>
+      </section>
+    </main>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <footer><span>Šaržovní den · pracovní nástroje · v1.4.0</span><span>Offline · žádná data neopouštějí prohlížeč</span></footer>
+  </div>
+  <style id="print-rules"></style>
+  <script type="module" src="js/workbench.js"></script>
+</body>
+</html>

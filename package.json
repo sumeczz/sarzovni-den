@@ -1,0 +1,14 @@
+{
+  "name": "pomocnik-sklad",
+  "version": "1.4.0",
+  "private": true,
+  "type": "module",
+  "description": "Chrome/Edge rozšíření: šaržovní den, profesionální návrhář štítků, inteligentní SAP/Excel import, kontrola kvality a QR/Code 128 studio.",
+  "engines": {
+    "node": ">=20.4"
+  },
+  "scripts": {
+    "test": "node --test \"tests/*.test.mjs\"",
+    "icons": "node tools/make-icons.mjs"
+  }
+}

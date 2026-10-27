@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <title>Creator štítků a kódů</title>
+  <link rel="stylesheet" href="css/creator.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">▦</span>
+        <span><strong>Creator</strong><small>QR · CODE 128 · GS1-128 · A4</small></span>
+      </a>
+      <nav class="top-actions">
+        <a class="button ghost" href="workbench.html?view=import">Import dat</a>
+        <a class="button ghost" href="index.html">← Hlavní generátor</a>
+      </nav>
+    </header>
+
+    <main class="creator-grid">
+      <section class="panel generator">
+        <div class="type-switch">
+          <button type="button" class="type-tab active" data-kind="qr"><span>▦</span><b>QR kód</b></button>
+          <button type="button" class="type-tab" data-kind="barcode"><span>▥</span><b>Code 128</b></button>
+          <button type="button" class="type-tab" data-kind="gs1"><span>GS1</span><b>GS1-128</b></button>
+        </div>
+
+        <div class="pane" id="pane-qr">
+          <label class="field">
+            <span>Typ obsahu</span>
+            <select id="qr-mode">
+              <option value="text">Text nebo libovolná data</option>
+              <option value="url">Webová adresa (URL)</option>
+              <option value="wifi">Wi-Fi připojení</option>
+              <option value="email">E-mail</option>
+              <option value="phone">Telefonní číslo</option>
+              <option value="sms">SMS zpráva</option>
+              <option value="contact">Kontakt (vCard)</option>
+              <option value="location">GPS souřadnice</option>
+            </select>
+          </label>
+          <div id="qr-fields" class="dynamic-fields"></div>
+          <div class="two">
+            <label class="field"><span>Korekce</span>
+              <select id="qr-ecc"><option value="L">L · 7 %</option><option value="M" selected>M · 15 %</option><option value="Q">Q · 25 %</option><option value="H">H · 30 %</option></select>
+            </label>
+            <label class="field"><span>Velikost exportu</span>
+              <select id="qr-size"><option value="256">256 px</option><option value="512" selected>512 px</option><option value="768">768 px</option><option value="1024">1024 px</option></select>
+            </label>
+          </div>
+          <div class="two">
+            <label class="field"><span>Barva modulů</span><input id="qr-fg" type="color" value="#101828"></label>
+            <label class="field"><span>Pozadí</span><input id="qr-bg" type="color" value="#ffffff"></label>
+          </div>
+          <div class="checks">
+            <label><input id="qr-quiet" type="checkbox" checked> Čistá zóna</label>
+            <label><input id="qr-rounded" type="checkbox"> Zaoblené moduly</label>
+          </div>
+        </div>
+
+        <div class="pane" id="pane-barcode" hidden>
+          <label class="field">
+            <span>Obsah čárového kódu (ASCII)</span>
+            <textarea id="bar-text" rows="4" spellcheck="false" placeholder="Např. ID produktu, šarže, kód…">12472A2736</textarea>
+            <small id="bar-count">10 znaků</small>
+          </label>
+          <div class="two">
+            <label class="field"><span>Výška pruhů</span>
+              <select id="bar-height"><option value="40">40 px</option><option value="60" selected>60 px</option><option value="90">90 px</option><option value="120">120 px</option></select>
+            </label>
+            <label class="field"><span>Barva pruhů</span><input id="bar-fg" type="color" value="#101828"></label>
+          </div>
+          <div class="two">
+            <label class="field"><span>Pozadí</span><input id="bar-bg" type="color" value="#ffffff"></label>
+            <label class="check-inline"><input id="bar-human" type="checkbox" checked> Text pod kódem</label>
+          </div>
+        </div>
+
+        <div class="pane" id="pane-gs1" hidden>
+          <div class="gs1-builder">
+            <label class="field">
+              <span>Application Identifier (AI)</span>
+              <select id="gs1-ai"></select>
+            </label>
+            <p class="ai-description" id="gs1-description"></p>
+            <label class="field">
+              <span>Hodnota AI</span>
+              <input id="gs1-value" type="text" autocomplete="off" spellcheck="false">
+            </label>
+            <button type="button" class="button" id="gs1-add">Přidat prvek</button>
+          </div>
+          <div class="gs1-list-wrap">
+            <div class="subhead"><span>Prvky kódu</span><button type="button" class="link" id="gs1-clear">Vymazat</button></div>
+            <ul class="gs1-list" id="gs1-list"></ul>
+            <p class="hint" id="gs1-preview-line">Zatím žádné prvky.</p>
+          </div>
+          <div class="two">
+            <label class="field"><span>Výška pruhů</span>
+              <select id="gs1-height"><option value="40">40 px</option><option value="60" selected>60 px</option><option value="90">90 px</option><option value="120">120 px</option></select>
+            </label>
+            <label class="field"><span>Barva pruhů</span><input id="gs1-fg" type="color" value="#101828"></label>
+          </div>
+          <div class="two">
+            <label class="field"><span>Pozadí</span><input id="gs1-bg" type="color" value="#ffffff"></label>
+            <label class="check-inline"><input id="gs1-human" type="checkbox" checked> Text pod kódem</label>
+          </div>
+          <details class="ai-reference">
+            <summary>Přehled všech podporovaných AI</summary>
+            <div class="table-wrap">
+              <table class="ai-table">
+                <thead><tr><th>AI</th><th>Význam</th><th>Formát</th></tr></thead>
+                <tbody id="gs1-ai-table"></tbody>
+              </table>
+            </div>
+          </details>
+        </div>
+
+        <div class="size-fields two">
+          <label class="field"><span>Šířka kódu (mm)</span><input id="code-width" type="number" min="10" max="297" step="0.5" value="32"></label>
+          <label class="field"><span>Výška kódu (mm)</span><input id="code-height" type="number" min="10" max="210" step="0.5" value="32"></label>
+        </div>
+
+        <div class="current-preview">
+          <div class="subhead"><span>Náhled vytvářeného kódu</span></div>
+          <div class="mini-paper"><div id="mini-preview"></div></div>
+        </div>
+
+        <div class="actions">
+          <button type="button" class="button primary" id="add-to-sheet">Přidat na arch +</button>
+        </div>
+        <p class="status" id="status" role="status" aria-live="polite"></p>
+      </section>
+
+      <section class="panel sheet-panel">
+        <div class="sheet-head">
+          <div><span class="kicker">ROZLOŽENÍ TISKU / A4</span><h2>Arch A4 na šířku</h2><p class="hint">Kódy přetahuj myší. První kód je vycentrovaný automaticky.</p></div>
+          <span class="pill" id="placement-count">0 kódů</span>
+        </div>
+        <div class="sheet-toolbar">
+          <button type="button" class="button small" id="center-selected">Vycentrovat</button>
+          <button type="button" class="button small" id="delete-selected">Smazat vybraný</button>
+          <button type="button" class="button small" id="clear-sheet">Vymazat arch</button>
+          <button type="button" class="button primary small" id="print-sheet">Tisk A4</button>
+        </div>
+        <div class="sheet-wrap">
+          <div class="align-tools" aria-label="Zarovnání vybraného kódu">
+            <button type="button" class="align-btn" data-align="left" title="Zarovnat vlevo">⇤</button>
+            <button type="button" class="align-btn" data-align="center-x" title="Vycentrovat vodorovně">⇔</button>
+            <button type="button" class="align-btn" data-align="right" title="Zarovnat vpravo">⇥</button>
+            <button type="button" class="align-btn" data-align="top" title="Zarovnat nahoru">⇧</button>
+            <button type="button" class="align-btn" data-align="center-y" title="Vycentrovat svisle">⇕</button>
+            <button type="button" class="align-btn" data-align="bottom" title="Zarovnat dolů">⇩</button>
+            <button type="button" class="align-btn wide" data-align="next" title="Umístit vedle nejbližšího kódu">Vedle dalšího</button>
+          </div>
+          <div class="sheet-stage">
+            <div class="sheet" id="sheet"></div>
+          </div>
+        </div>
+        <p class="hint">Vybraný kód má zelený rámeček. Šipky vlevo slouží k rychlému zarovnání na papír.</p>
+      </section>
+    </main>
+  </div>
+  <script type="module" src="js/creator.js"></script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+:root {
+  --bg: #0f172a;
+  --text: #f8fafc;
+  --text-dim: #94a3b8;
+  --accent: #facc15;
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 24px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 48px);
+  gap: 16px;
+  text-align: center;
+}
+
+/* Šířka se přizpůsobí obrazovce i její výšce, aby čárový kód byl co největší
+   a zároveň se vešel na obrazovku i s popiskem. */
+.barcode {
+  width: min(96vw, 1200px, 150vh);
+  padding: 20px;
+  border-radius: 16px;
+  background: #ffffff;
+}
+
+.barcode svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.code {
+  margin: 0;
+  font-family: "Cascadia Mono", Consolas, "Courier New", monospace;
+  font-size: clamp(32px, 7vw, 96px);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.hint {
+  margin: 0;
+  color: var(--text-dim);
+  font-size: 15px;
+}
+
+.fallback {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.fallback[hidden] {
+  display: none;
+}
+
+.fallback input {
+  padding: 10px 12px;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  background: #1e293b;
+  color: var(--text);
+  font: inherit;
+}
+
+.fallback button {
+  padding: 10px 16px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--accent);
+  color: var(--bg);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}

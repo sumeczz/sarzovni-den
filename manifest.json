@@ -1,0 +1,330 @@
+﻿[
+    {
+        "path":  ".gitattributes",
+        "size":  32
+    },
+    {
+        "path":  ".github/workflows/deploy-pages.yml",
+        "size":  1061
+    },
+    {
+        "path":  ".gitignore",
+        "size":  80
+    },
+    {
+        "path":  ".nojekyll",
+        "size":  0
+    },
+    {
+        "path":  "creator.html",
+        "size":  8959
+    },
+    {
+        "path":  "css/creator.css",
+        "size":  10493
+    },
+    {
+        "path":  "css/menu.css",
+        "size":  2054
+    },
+    {
+        "path":  "css/mobile-app.css",
+        "size":  10019
+    },
+    {
+        "path":  "css/popup.css",
+        "size":  11248
+    },
+    {
+        "path":  "css/print.css",
+        "size":  11504
+    },
+    {
+        "path":  "css/scan.css",
+        "size":  1494
+    },
+    {
+        "path":  "css/settings.css",
+        "size":  1831
+    },
+    {
+        "path":  "css/workbench-extra.css",
+        "size":  757
+    },
+    {
+        "path":  "css/workbench.css",
+        "size":  17292
+    },
+    {
+        "path":  "CHANGELOG.md",
+        "size":  9625
+    },
+    {
+        "path":  "icons/icon128.png",
+        "size":  320
+    },
+    {
+        "path":  "icons/icon16.png",
+        "size":  102
+    },
+    {
+        "path":  "icons/icon192.png",
+        "size":  506
+    },
+    {
+        "path":  "icons/icon32.png",
+        "size":  122
+    },
+    {
+        "path":  "icons/icon48.png",
+        "size":  153
+    },
+    {
+        "path":  "icons/icon512.png",
+        "size":  2186
+    },
+    {
+        "path":  "index.html",
+        "size":  6853
+    },
+    {
+        "path":  "js/code128.js",
+        "size":  4571
+    },
+    {
+        "path":  "js/config.js",
+        "size":  867
+    },
+    {
+        "path":  "js/core.js",
+        "size":  5617
+    },
+    {
+        "path":  "js/creator.js",
+        "size":  26063
+    },
+    {
+        "path":  "js/gs1.js",
+        "size":  5387
+    },
+    {
+        "path":  "js/label-model.js",
+        "size":  2222
+    },
+    {
+        "path":  "js/label.js",
+        "size":  4858
+    },
+    {
+        "path":  "js/menu.js",
+        "size":  5535
+    },
+    {
+        "path":  "js/mobile-app.js",
+        "size":  10809
+    },
+    {
+        "path":  "js/popup.js",
+        "size":  18688
+    },
+    {
+        "path":  "js/print.js",
+        "size":  25473
+    },
+    {
+        "path":  "js/qr-svg.js",
+        "size":  3107
+    },
+    {
+        "path":  "js/quality.js",
+        "size":  9586
+    },
+    {
+        "path":  "js/sap-import.js",
+        "size":  23292
+    },
+    {
+        "path":  "js/scan.js",
+        "size":  2420
+    },
+    {
+        "path":  "js/settings.js",
+        "size":  5807
+    },
+    {
+        "path":  "js/storage.js",
+        "size":  3632
+    },
+    {
+        "path":  "js/vendor/qr/index.js",
+        "size":  10665
+    },
+    {
+        "path":  "js/vendor/qr/LICENSE.txt",
+        "size":  1199
+    },
+    {
+        "path":  "js/vendor/qr/QR8bitByte.js",
+        "size":  410
+    },
+    {
+        "path":  "js/vendor/qr/QRBitBuffer.js",
+        "size":  700
+    },
+    {
+        "path":  "js/vendor/qr/QRErrorCorrectLevel.js",
+        "size":  52
+    },
+    {
+        "path":  "js/vendor/qr/QRMaskPattern.js",
+        "size":  155
+    },
+    {
+        "path":  "js/vendor/qr/QRMath.js",
+        "size":  671
+    },
+    {
+        "path":  "js/vendor/qr/QRMode.js",
+        "size":  147
+    },
+    {
+        "path":  "js/vendor/qr/QRPolynomial.js",
+        "size":  1330
+    },
+    {
+        "path":  "js/vendor/qr/QRRSBlock.js",
+        "size":  5554
+    },
+    {
+        "path":  "js/vendor/qr/QRUtil.js",
+        "size":  8220
+    },
+    {
+        "path":  "js/workbench.js",
+        "size":  48643
+    },
+    {
+        "path":  "js/xlsx-import.js",
+        "size":  7290
+    },
+    {
+        "path":  "manifest.json",
+        "size":  770
+    },
+    {
+        "path":  "manifest.webmanifest",
+        "size":  764
+    },
+    {
+        "path":  "package.json",
+        "size":  415
+    },
+    {
+        "path":  "popup.html",
+        "size":  6437
+    },
+    {
+        "path":  "print.html",
+        "size":  7638
+    },
+    {
+        "path":  "pwa/app.js",
+        "size":  16444
+    },
+    {
+        "path":  "pwa/big.html",
+        "size":  1336
+    },
+    {
+        "path":  "pwa/big.js",
+        "size":  2531
+    },
+    {
+        "path":  "pwa/index.html",
+        "size":  5554
+    },
+    {
+        "path":  "pwa/manifest.webmanifest",
+        "size":  1098
+    },
+    {
+        "path":  "pwa/store.js",
+        "size":  1822
+    },
+    {
+        "path":  "pwa/styles.css",
+        "size":  9052
+    },
+    {
+        "path":  "README-GITHUB-PAGES.md",
+        "size":  3062
+    },
+    {
+        "path":  "README.md",
+        "size":  15824
+    },
+    {
+        "path":  "ROADMAP.md",
+        "size":  8067
+    },
+    {
+        "path":  "scan.html",
+        "size":  711
+    },
+    {
+        "path":  "settings.html",
+        "size":  6118
+    },
+    {
+        "path":  "sw.js",
+        "size":  3295
+    },
+    {
+        "path":  "tests/code128.test.mjs",
+        "size":  8014
+    },
+    {
+        "path":  "tests/core.test.mjs",
+        "size":  7346
+    },
+    {
+        "path":  "tests/gs1.test.mjs",
+        "size":  1835
+    },
+    {
+        "path":  "tests/label.test.mjs",
+        "size":  6013
+    },
+    {
+        "path":  "tests/qr-generator.test.mjs",
+        "size":  1053
+    },
+    {
+        "path":  "tests/qr-svg.test.mjs",
+        "size":  2518
+    },
+    {
+        "path":  "tests/quality.test.mjs",
+        "size":  1990
+    },
+    {
+        "path":  "tests/sap-import.test.mjs",
+        "size":  4139
+    },
+    {
+        "path":  "tests/storage.test.mjs",
+        "size":  6177
+    },
+    {
+        "path":  "tools/make-icons.mjs",
+        "size":  5103
+    },
+    {
+        "path":  "tools/normalize-eol.mjs",
+        "size":  537
+    },
+    {
+        "path":  "workbench.html",
+        "size":  13836
+    }
+]

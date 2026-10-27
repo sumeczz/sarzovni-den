@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="cs">
+  <head>
+    <meta charset="utf-8" />
+    <title>Šaržovní den</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="description" content="Šaržovní den z verze plechu, dne v roce a roku. Čárový kód Code 128, tisk štítků a historie." />
+    <meta name="theme-color" content="#0f172a" />
+    <meta name="color-scheme" content="dark" />
+    <!-- iOS: přidání na plošku, jinak to Safari neudělá samo -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Šaržovní den" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="icon" href="../icons/icon48.png" sizes="48x48" />
+    <link rel="apple-touch-icon" href="../icons/icon192.png" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <header class="header">
+      <h1>Šaržovní den</h1>
+      <p class="date" id="date"></p>
+    </header>
+
+    <main>
+      <section class="code-line" aria-labelledby="code">
+        <span class="code-prefix" aria-hidden="true">Verze:</span>
+        <span class="code" id="code">
+          <input
+            id="version"
+            class="code-version"
+            type="text"
+            placeholder="verze"
+            aria-label="Verze"
+            title="Verze (v SAPu šarže dodavatele)"
+            autocomplete="off"
+            autocapitalize="characters"
+            spellcheck="false"
+            enterkeyhint="done"
+          /><span class="code-day" id="code-day">000</span
+          ><span class="code-year" id="code-year">0</span>
+        </span>
+      </section>
+
+      <p class="status" id="status" role="status" aria-live="polite"></p>
+
+      <div class="barcode" id="barcode-panel">
+        <div class="barcode-image" id="barcode"></div>
+        <p class="barcode-caption" id="barcode-caption"></p>
+      </div>
+
+      <div class="actions">
+        <button type="button" class="button primary" id="copy">Kopírovat kód</button>
+        <button type="button" class="button" id="big">Velký kód</button>
+        <button type="button" class="button" id="print">Tisk</button>
+        <button type="button" class="button" id="save">Uložit</button>
+      </div>
+
+      <section class="panel" id="print-panel">
+        <button type="button" class="panel-toggle" id="print-toggle" aria-expanded="false" aria-controls="print-config">
+          <span>Tisk štítku</span>
+          <span class="panel-summary" id="print-summary"></span>
+        </button>
+
+        <div class="panel-body" id="print-config" hidden>
+          <div class="panel-row">
+            <label class="panel-field">
+              <span>Šířka štítku (mm)</span>
+              <input type="number" id="label-width" min="20" max="200" step="1" inputmode="numeric" />
+            </label>
+
+            <label class="panel-field">
+              <span>Kusů na kód</span>
+              <input type="number" id="label-copies" min="1" max="200" step="1" value="1" inputmode="numeric" />
+            </label>
+          </div>
+
+          <div class="presets" id="presets"></div>
+          <p class="status" id="print-info" role="status" aria-live="polite"></p>
+          <div class="panel-actions">
+            <button type="button" class="button small" id="fix-width" hidden></button>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" id="multi-panel">
+        <button type="button" class="panel-toggle" id="multi-toggle" aria-expanded="false" aria-controls="multi-body">
+          <span>Více kódů</span>
+          <span class="panel-summary" id="multi-count"></span>
+        </button>
+
+        <div class="panel-body" id="multi-body" hidden>
+          <input
+            id="multi-versions"
+            class="input"
+            type="text"
+            placeholder="verze oddělené mezerou, např. 12472A 12472B"
+            aria-label="Verze pro více kódů"
+            autocomplete="off"
+            spellcheck="false"
+            enterkeyhint="done"
+          />
+          <p class="status" id="multi-info" role="status" aria-live="polite"></p>
+          <div class="actions">
+            <button type="button" class="button" id="multi-copy">Kopírovat vše</button>
+            <button type="button" class="button" id="multi-save">Uložit vše</button>
+            <button type="button" class="button primary" id="multi-print">Tisk</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <section class="history" id="history-section">
+      <button type="button" class="history-toggle" id="history-toggle" aria-expanded="false" aria-controls="history-body">
+        <span>Historie</span>
+        <span class="history-count" id="history-count">0</span>
+      </button>
+
+      <div class="history-body" id="history-body" hidden>
+        <input id="search" class="input" type="search" placeholder="Hledat v historii" aria-label="Hledat v historii" enterkeyhint="search" />
+        <ul class="history-list" id="history-list"></ul>
+        <p class="history-empty" id="history-empty" hidden>Zatím nic uloženého.</p>
+        <div class="history-footer">
+          <span class="hint">Kliknutí na záznam ho doplní do pole.</span>
+          <button type="button" class="link" id="clear">Vymazat vše</button>
+        </div>
+      </div>
+    </section>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>

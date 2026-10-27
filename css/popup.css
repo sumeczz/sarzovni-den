@@ -1,0 +1,598 @@
+:root {
+  --bg: #0b1220;
+  --bg-soft: #141f31;
+  --bg-soft-hover: #202e43;
+  --text: #f3f6fb;
+  --text-dim: #9aa9bd;
+  --accent: #5bcba3;
+  --danger: #fb7185;
+  --border: #29384d;
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Třída s vlastním `display` by jinak přebila výchozí `display: none` atributu hidden. */
+[hidden] {
+  display: none !important;
+}
+
+body {
+  width: 420px;
+  max-height: 590px;
+  overflow-y: auto;
+  margin: 0;
+  padding: 14px;
+  background: radial-gradient(ellipse at top right, #1a2940 0, var(--bg) 48%);
+  background-attachment: fixed;
+  color: var(--text);
+  font: 14px/1.4 "Segoe UI", system-ui, sans-serif;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.16);
+}
+
+.brand-lockup {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.brand-mark {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border: 1px solid rgba(91, 203, 163, 0.45);
+  border-radius: 10px;
+  background: linear-gradient(145deg, #5bcba3, #3aa882);
+  color: #172033;
+  font-size: 19px;
+  font-weight: 900;
+  box-shadow: 0 5px 18px rgba(245, 196, 81, 0.12);
+}
+
+.eyebrow {
+  margin: 0 0 1px;
+  color: var(--text-dim);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .15em;
+}
+
+h1 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 750;
+  letter-spacing: 0.02em;
+}
+
+.date {
+  margin: 0;
+  color: var(--text-dim);
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+/* Kód: verze + den + rok stojí za sebou jako jedno číslo */
+.hero-card {
+  padding: 14px;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 14px;
+  background: linear-gradient(145deg, rgba(24, 37, 57, .98), rgba(16, 26, 42, .98));
+  box-shadow: 0 12px 28px rgba(0, 0, 0, .16), inset 0 1px rgba(255,255,255,.025);
+}
+
+.section-kicker {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--accent);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .13em;
+}
+
+.live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #5ee0a0;
+  box-shadow: 0 0 0 3px rgba(94,224,160,.12);
+}
+
+.hero-hint {
+  margin: 7px 0 12px;
+  color: var(--text-dim);
+  font-size: 12px;
+}
+
+.code-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  min-height: 43px;
+}
+
+.code-prefix {
+  color: var(--text-dim);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.code {
+  display: flex;
+  flex: 0 1 auto;
+  align-items: baseline;
+  border-bottom: 2px solid var(--border);
+  font-family: "Cascadia Mono", Consolas, "Courier New", monospace;
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.code:focus-within {
+  border-bottom-color: var(--accent);
+}
+
+.code-version {
+  /* šířku pole i velikost písma nastavuje popup.js podle délky verze */
+  flex: 0 1 auto;
+  min-width: 0;
+  padding: 2px 0;
+  border: 0;
+  background: none;
+  color: var(--accent);
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  /* psaní necháme být, písmena se převedou až po odečtení pole */
+  text-transform: uppercase;
+}
+
+.code-version::placeholder {
+  color: #64748b;
+  font-weight: 400;
+}
+
+.code-version:focus {
+  outline: none;
+}
+
+.code-day,
+.code-year {
+  flex: 0 0 auto;
+  color: var(--text);
+}
+
+.code-year {
+  color: var(--accent);
+}
+
+.input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-soft);
+  color: var(--text);
+  font: inherit;
+}
+
+.input:focus {
+  border-color: var(--accent);
+  outline: none;
+}
+
+.status {
+  min-height: 18px;
+  margin: 6px 0 0;
+  color: var(--text-dim);
+  font-size: 12px;
+}
+
+.status.error {
+  color: var(--danger);
+}
+
+.status.ok {
+  color: #4ade80;
+}
+
+.barcode {
+  margin: 12px 0;
+  padding: 11px;
+  border: 1px solid #e6eaf0;
+  border-radius: 10px;
+  background: #ffffff;
+}
+
+.barcode-image svg {
+  display: block;
+  width: 100%;
+  height: 92px;
+}
+
+.barcode-caption {
+  margin: 6px 0 0;
+  color: #0f172a;
+  font-family: "Cascadia Mono", Consolas, "Courier New", monospace;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-align: center;
+}
+
+.barcode.is-empty {
+  background: var(--bg-soft);
+}
+
+.barcode.is-empty .barcode-image,
+.barcode.is-empty .barcode-caption {
+  display: none;
+}
+
+.barcode.is-empty::after {
+  display: block;
+  color: var(--text-dim);
+  content: "Zadej verzi plechu";
+  font-size: 13px;
+  text-align: center;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 8px;
+}
+
+.button {
+  padding: 9px 8px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg-soft);
+  color: var(--text);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: var(--bg-soft-hover);
+}
+
+.button:active {
+  transform: translateY(1px);
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.button.small {
+  padding: 6px 10px;
+  font-size: 12px;
+}
+
+.button.primary {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #0f172a;
+}
+
+.button.primary:hover {
+  background: #fde047;
+}
+
+/* ------------------------------------------------------------- panely */
+
+.panel {
+  margin-top: 12px;
+  border-top: 1px solid var(--border);
+}
+
+.panel-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px 2px;
+  border: 0;
+  background: none;
+  color: var(--text);
+  font: inherit;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+}
+
+.panel-toggle::after {
+  color: var(--text-dim);
+  content: "▾";
+  font-size: 11px;
+}
+
+.panel-toggle[aria-expanded="true"]::after {
+  content: "▴";
+}
+
+.panel-summary {
+  margin-left: auto;
+  color: var(--text-dim);
+  font-family: "Cascadia Mono", Consolas, "Courier New", monospace;
+  font-size: 11px;
+  font-weight: 400;
+}
+
+.panel-body {
+  padding-bottom: 4px;
+}
+
+.panel-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.panel-field {
+  display: flex;
+  flex: 1 1 120px;
+  flex-direction: column;
+  gap: 4px;
+  color: var(--text-dim);
+  font-size: 12px;
+}
+
+.panel-field input {
+  width: 100%;
+  padding: 7px 9px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg-soft);
+  color: var(--text);
+  font: inherit;
+}
+
+.panel-field input:focus {
+  border-color: var(--accent);
+  outline: none;
+}
+
+.presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 8px 0;
+}
+
+.preset {
+  padding: 5px 9px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--bg-soft);
+  color: var(--text-dim);
+  font: inherit;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.preset:hover {
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.preset.is-active {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #0f172a;
+}
+
+.panel-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+/* ------------------------------------------------------------ historie */
+
+.history {
+  margin-top: 12px;
+  border-top: 1px solid var(--border);
+}
+
+.history-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 2px 2px;
+  border: 0;
+  background: none;
+  color: var(--text);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.history-toggle::after {
+  color: var(--text-dim);
+  content: "▾";
+  font-size: 11px;
+}
+
+.history-toggle[aria-expanded="true"]::after {
+  content: "▴";
+}
+
+.history-count {
+  min-width: 22px;
+  margin-left: auto;
+  margin-right: 8px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: var(--bg-soft);
+  color: var(--text-dim);
+  font-size: 12px;
+  text-align: center;
+}
+
+.history-body {
+  padding-top: 8px;
+}
+
+.history-list {
+  max-height: 200px;
+  margin: 8px 0 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.history-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.history-item:hover,
+.history-item:focus-visible {
+  background: var(--bg-soft);
+}
+
+.history-item-main {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  flex-direction: column;
+}
+
+.history-item-code {
+  overflow: hidden;
+  font-family: "Cascadia Mono", Consolas, "Courier New", monospace;
+  font-size: 14px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.history-item-meta {
+  color: var(--text-dim);
+  font-size: 11px;
+}
+
+.history-item-remove {
+  flex: 0 0 auto;
+  padding: 2px 6px;
+  border: 0;
+  border-radius: 4px;
+  background: none;
+  color: var(--text-dim);
+  font: inherit;
+  cursor: pointer;
+}
+
+.history-item-remove:hover {
+  background: var(--bg-soft-hover);
+  color: var(--danger);
+}
+
+.history-empty {
+  margin: 8px 0 0;
+  color: var(--text-dim);
+  font-size: 13px;
+  text-align: center;
+}
+
+.history-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.hint {
+  color: var(--text-dim);
+  font-size: 12px;
+}
+
+.link {
+  padding: 2px 4px;
+  border: 0;
+  background: none;
+  color: var(--text-dim);
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.link:hover {
+  color: var(--danger);
+}
+
+
+/* Sekundární generátor a jemné dokončení rozhraní */
+.tool-label {
+  display: block;
+  margin: 3px 0 6px;
+  color: var(--text-dim);
+  font-size: 12px;
+}
+
+.tool-preview {
+  display: flex;
+  min-height: 110px;
+  margin-top: 9px;
+  padding: 12px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid #e4e9f0;
+  border-radius: 10px;
+  background: #fff;
+  color: #64748b;
+  font-size: 12px;
+  text-align: center;
+}
+
+.tool-barcode-svg { width: 100%; }
+.tool-barcode-svg svg { display: block; width: 100%; height: 72px; }
+.tool-barcode-caption {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  color: #0f172a;
+  font-family: "Cascadia Mono", Consolas, monospace;
+  font-size: 13px;
+  font-weight: 750;
+}
+.tool-actions { grid-template-columns: 1fr 1fr; margin-top: 8px; }
+.button, .preset { transition: background .15s ease, border-color .15s ease, transform .1s ease; }
+.button:focus-visible, .panel-toggle:focus-visible, .preset:focus-visible, .link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+
+/* Rychlý přístup k doplňkovým modulům bez odsunutí šaržovního dne. */
+.main-menu { display: flex; flex-wrap: wrap; gap: 7px; margin: 10px 0 14px; }
+.menu-link { display: inline-flex; align-items: center; min-height: 34px; padding: 8px 10px; border: 1px solid var(--border); border-radius: 10px; color: var(--text); text-decoration: none; font-size: 11px; font-weight: 700; background: rgba(255,255,255,.035); }
+.menu-link:hover { border-color: var(--accent); background: rgba(91,203,163,.10); }
+.tool-link { display: inline-flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 34px; padding: 8px 10px; border: 1px solid var(--border); border-radius: 10px; color: var(--text); text-decoration: none; font-size: 11px; font-weight: 700; background: rgba(255,255,255,.035); }
+.tool-link:hover { border-color: var(--accent); background: rgba(91,203,163,.10); }
+.tool-link-primary { border-color: rgba(91,203,163,.45); background: rgba(91,203,163,.13); }

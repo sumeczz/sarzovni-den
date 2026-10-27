@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="cs">
+  <head>
+    <meta charset="utf-8" />
+    <title>Velký čárový kód</title>
+    <link rel="stylesheet" href="css/scan.css" />
+  </head>
+  <body>
+    <main>
+      <div class="barcode" id="barcode"></div>
+      <p class="code" id="code"></p>
+      <p class="hint">Enter = zkopírovat · F = celá obrazovka · Esc = zavřít</p>
+
+      <form class="fallback" id="fallback" hidden>
+        <label for="version">Verze</label>
+        <input id="version" type="text" autocomplete="off" spellcheck="false" placeholder="12472A" />
+        <button type="submit">Zobrazit kód</button>
+      </form>
+    </main>
+
+    <script type="module" src="js/scan.js"></script>
+  </body>
+</html>

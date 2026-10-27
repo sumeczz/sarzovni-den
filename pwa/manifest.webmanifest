@@ -1,0 +1,45 @@
+{
+  "name": "Šaržovní den – verze, den v roce a tisk štítků",
+  "short_name": "Šaržovní den",
+  "description": "Šaržovní den z verze plechu, dne v roce a roku. Čárový kód Code 128, tisk štítků a historie kódů.",
+  "lang": "cs",
+  "dir": "ltr",
+  "start_url": "index.html",
+  "scope": "../",
+  "id": "./index.html",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "categories": ["productivity", "business"],
+  "icons": [
+    {
+      "src": "../icons/icon48.png",
+      "sizes": "48x48",
+      "type": "image/png"
+    },
+    {
+      "src": "../icons/icon192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "../icons/icon192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "../icons/icon512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "../icons/icon512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <title>Nastavení · Šaržovní den 1.4.0</title>
+  <link rel="stylesheet" href="css/workbench.css">
+  <link rel="stylesheet" href="css/menu.css">
+  <link rel="stylesheet" href="css/settings.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="index.html"><span class="brand-icon">Š</span><span><strong>Šaržovní den</strong><small>NASTAVENÍ</small></span></a>
+      <div class="topbar-center">
+        <span class="eyebrow">KONFIGURACE</span>
+        <h1>Nastavení</h1>
+        <p>Chování generátoru, výchozí tisk a historie. Vše zůstává lokálně v prohlížeči.</p>
+      </div>
+      <div data-app-menu></div>
+    </header>
+
+    <main class="settings-main">
+      <div class="settings-grid">
+        <section class="panel settings-card">
+          <div class="panel-head">
+            <div class="step-number">01</div>
+            <div><h3>Generátor šaržovního dne</h3><p>Dočasně vypni automatické doplňování dne v roce nebo roku. Kód pak zůstane jen verzí.</p></div>
+          </div>
+          <label class="check-line"><input type="checkbox" id="auto-fill-day"> Automaticky doplňovat den v roce</label>
+          <label class="check-line"><input type="checkbox" id="auto-fill-year"> Automaticky doplňovat rok</label>
+          <div class="code-preview">
+            <span>Náhled kódu</span>
+            <b id="code-preview">12472A2736</b>
+            <small id="preview-note"></small>
+          </div>
+          <p class="note">Ukázka pracuje s verzí <code>12472A</code> a dnešním datem. Nastavení platí pro popup rozšíření i PWA aplikaci.</p>
+        </section>
+
+        <section class="panel settings-card">
+          <div class="panel-head">
+            <div class="step-number">02</div>
+            <div><h3>Výchozí tisk a štítek</h3><p>Hodnoty, se kterými se otevře tiskové centrum, když do něj přejdeš z menu.</p></div>
+          </div>
+          <div class="two-fields">
+            <label class="field"><span>Výchozí šířka štítku (mm)</span><input id="label-width" type="number" min="20" max="200" step="1"></label>
+            <label class="field"><span>Výchozí počet kusů na kód</span><input id="label-copies" type="number" min="1" max="200" step="1"></label>
+          </div>
+          <div class="two-fields">
+            <label class="field"><span>Formát papíru</span>
+              <select id="print-paper">
+                <option value="a4">A4</option>
+                <option value="a5">A5</option>
+                <option value="a6">A6</option>
+                <option value="letter">Letter</option>
+              </select>
+            </label>
+            <label class="field"><span>Orientace</span>
+              <select id="print-orientation">
+                <option value="portrait">Na výšku</option>
+                <option value="landscape">Na šířku</option>
+              </select>
+            </label>
+          </div>
+          <div class="two-fields">
+            <label class="field"><span>Okraj stránky (mm)</span><input id="print-margin" type="number" min="0" max="50" step="0.5"></label>
+            <label class="field"><span>Mezera mezi štítky (mm)</span><input id="print-gap" type="number" min="0" max="50" step="0.5"></label>
+          </div>
+          <div class="two-fields">
+            <label class="field"><span>Režim tisku</span>
+              <select id="print-mode">
+                <option value="auto">Automaticky</option>
+                <option value="paper">Vždy na papír</option>
+                <option value="label">Vždy velikost štítku</option>
+              </select>
+            </label>
+            <label class="check-line"><input type="checkbox" id="print-text"> Zobrazit text pod kódem</label>
+          </div>
+        </section>
+
+        <section class="panel settings-card">
+          <div class="panel-head">
+            <div class="step-number">03</div>
+            <div><h3>Historie kódů</h3><p>Kolik posledních kódů si aplikace pamatuje a možnost je smazat.</p></div>
+          </div>
+          <label class="field"><span>Maximální počet záznamů</span><input id="history-limit" type="number" min="10" max="500" step="10"></label>
+          <p class="note" id="history-info">Zatím žádná historie.</p>
+          <button type="button" class="button ghost" id="clear-history">Vymazat historii</button>
+        </section>
+
+        <section class="panel settings-card">
+          <div class="panel-head">
+            <div class="step-number">04</div>
+            <div><h3>Aplikace a stránky</h3><p>Rychlé odkazy na další části nástroje a informace o ukládání dat.</p></div>
+          </div>
+          <div class="settings-links">
+            <a class="button ghost" href="index.html" rel="noreferrer">Otevřít PWA verzi</a>
+            <a class="button ghost" href="print.html" target="_blank" rel="noreferrer">Tiskové centrum</a>
+            <a class="button ghost" href="creator.html" target="_blank" rel="noreferrer">Creator štítků</a>
+          </div>
+          <p class="note">Rozšíření ukládá stav do <code>chrome.storage.local</code>, PWA do <code>localStorage</code>. Data nikdy neopouštějí prohlížeč.</p>
+        </section>
+      </div>
+
+      <div class="settings-actions">
+        <p class="pill" id="status">Načteno</p>
+        <div class="settings-action-buttons">
+          <button type="button" class="button ghost" id="reset">Obnovit výchozí</button>
+          <button type="button" class="button primary" id="save">Uložit nastavení</button>
+        </div>
+      </div>
+    </main>
+
+    <footer><span>Šaržovní den · nastavení · v1.4.0</span><span>Offline · žádná data neopouštějí prohlížeč</span></footer>
+  </div>
+  <script type="module" src="js/menu.js"></script>
+  <script type="module" src="js/settings.js"></script>
+</body>
+</html>

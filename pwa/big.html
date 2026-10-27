@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="cs">
+  <head>
+    <meta charset="utf-8" />
+    <title>Velký čárový kód</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+    <meta name="theme-color" content="#0f172a" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="icon" href="../icons/icon48.png" sizes="48x48" />
+    <link rel="apple-touch-icon" href="../icons/icon192.png" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body class="big">
+    <main>
+      <div class="barcode-image" id="barcode"></div>
+      <p class="big-code" id="code"></p>
+      <p class="big-hint">Klepni na kód pro kopírování · Zpět se vrací na hlavní stránku</p>
+      <a class="button primary" href="../index.html">Zpět do aplikace</a>
+    </main>
+
+    <form class="fallback" id="fallback" hidden>
+      <label for="version">Verze</label>
+      <input id="version" type="text" placeholder="12472A" autocomplete="off" autocapitalize="characters" spellcheck="false" enterkeyhint="go" />
+      <button type="submit" class="button primary">Zobrazit kód</button>
+    </form>
+
+    <script type="module" src="big.js"></script>
+  </body>
+</html>

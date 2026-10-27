@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b1220">
+  <meta name="description" content="Šaržovní den – mobilní aplikace pro sklad. Generování čárových kódů, tisk štítků, import SAP/Excel a QR Studio.">
+  <meta name="color-scheme" content="dark">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Šaržovní den">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icons/icon48.png" sizes="48x48">
+  <link rel="apple-touch-icon" href="./icons/icon192.png">
+  <link rel="stylesheet" href="./css/mobile-app.css">
+  <title>Šaržovní den · Skladové nástroje</title>
+</head>
+<body>
+  <header class="mobile-header">
+    <a class="brand" href="./" aria-label="Šaržovní den – úvod">
+      <span class="brand-mark">Š</span>
+      <span><strong>Šaržovní den</strong><small>SKLADOVÉ NÁSTROJE</small></span>
+    </a>
+    <button id="install-button" class="icon-button" type="button" hidden aria-label="Nainstalovat aplikaci" title="Nainstalovat aplikaci">＋</button>
+  </header>
+
+  <main class="app-content">
+    <section class="intro">
+      <div class="eyebrow"><span class="live-dot"></span> MOBILNÍ PRACOVNÍ PROSTŘEDÍ</div>
+      <h1>Vše pro štítky.<br><span>Na jednom místě.</span></h1>
+      <p>Rychlé kódy, tisk etiket a nástroje pro data ze SAPu. Funguje lokálně a po prvním načtení i bez připojení.</p>
+    </section>
+
+    <section class="quick-card" aria-labelledby="generator-heading">
+      <div class="section-head">
+        <div><div class="eyebrow">01 / GENERÁTOR</div><h2 id="generator-heading">Šaržovní den</h2></div>
+        <span class="pill" id="today-pill">Dnes</span>
+      </div>
+      <label class="field" for="version"><span>Verze / šarže dodavatele (LICHA)</span><input id="version" type="text" maxlength="24" placeholder="Např. 12472A" autocapitalize="characters" autocomplete="off" spellcheck="false" enterkeyhint="done"></label>
+      <div id="generator-status" class="notice" role="status" aria-live="polite">Zadej verzi plechu.</div>
+      <div class="generated-code">
+        <div class="generated-label">VÝSLEDNÝ KÓD</div>
+        <output id="generated-code">—</output>
+        <div id="barcode" class="barcode-preview" aria-label="Náhled čárového kódu"></div>
+      </div>
+      <div class="button-grid">
+        <button id="copy-code" class="button primary" type="button" disabled>Kopírovat kód</button>
+        <button id="show-big" class="button" type="button" disabled>Velký kód</button>
+        <button id="print-code" class="button" type="button" disabled>Tisk štítku</button>
+        <button id="save-code" class="button" type="button" disabled>Uložit do historie</button>
+      </div>
+      <details class="subpanel" id="multiple-panel">
+        <summary>Hromadné generování <span id="multi-count" class="subtle">více verzí</span></summary>
+        <div class="details-body">
+          <label class="field" for="multi-versions"><span>Verze oddělené mezerou, čárkou nebo řádkem</span><textarea id="multi-versions" rows="3" placeholder="12472A 12472B 12472C" spellcheck="false"></textarea></label>
+          <p id="multi-status" class="muted">Kódy se generují podle dnešního data.</p>
+          <div class="button-grid">
+            <button id="multi-copy" class="button" type="button" disabled>Kopírovat vše</button>
+            <button id="multi-save" class="button" type="button" disabled>Uložit vše</button>
+            <button id="multi-print" class="button primary full" type="button" disabled>Tisk všech štítků</button>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <section class="tool-section">
+      <div class="section-heading"><div class="eyebrow">02 / PRACOVNÍ NÁSTROJE</div><h2>Co potřebuješ udělat?</h2></div>
+      <div class="tool-grid">
+        <a class="tool-card" href="./print.html"><span class="tool-icon">▤</span><span><strong>Tiskové centrum</strong><small>Rozměry v mm, rozložení, náhled a tisk</small></span><span class="chevron">›</span></a>
+        <a class="tool-card" href="./creator.html"><span class="tool-icon">▦</span><span><strong>QR & čárové kódy</strong><small>QR, Code 128, GS1-128 a arch štítků</small></span><span class="chevron">›</span></a>
+        <a class="tool-card" href="./workbench.html?view=import"><span class="tool-icon">⇧</span><span><strong>Import SAP / Excel</strong><small>CSV, TSV, TXT, XLSX a mapování sloupců</small></span><span class="chevron">›</span></a>
+        <a class="tool-card" href="./settings.html"><span class="tool-icon">⚙</span><span><strong>Nastavení</strong><small>Formát kódu, tisk, lokální data</small></span><span class="chevron">›</span></a>
+      </div>
+      <div class="privacy-note"><span>◉</span><p><strong>Data zůstávají v zařízení</strong><br>Historie, importy a šablony se zpracovávají v prohlížeči. Pro běžné funkce nepotřebuješ účet ani server.</p></div>
+    </section>
+
+    <section class="history-card">
+      <button id="history-toggle" class="history-toggle" type="button" aria-expanded="false" aria-controls="history-body"><span><span class="eyebrow">03 / POSLEDNÍ PRÁCE</span><strong>Historie kódů</strong></span><span id="history-count" class="pill">0</span><span class="chevron">⌄</span></button>
+      <div id="history-body" hidden>
+        <div class="history-content">
+          <input id="history-search" class="text-input" type="search" placeholder="Hledat kód nebo verzi" aria-label="Hledat historii">
+          <ul id="history-list" class="history-list"></ul>
+          <p id="history-empty" class="muted">Historie je zatím prázdná.</p>
+          <div class="history-tools"><button id="export-history" type="button" class="text-button">Export CSV</button><button id="clear-history" type="button" class="text-button danger-text">Vymazat historii</button></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <nav class="bottom-nav" aria-label="Hlavní nástroje">
+    <a class="active" href="./"><span>⌂</span><small>Domů</small></a>
+    <a href="./print.html"><span>▤</span><small>Tisk</small></a>
+    <a href="./creator.html"><span>▦</span><small>QR / kódy</small></a>
+    <a href="./workbench.html?view=import"><span>⇧</span><small>Import</small></a>
+    <a href="./settings.html"><span>⚙</span><small>Nastavení</small></a>
+  </nav>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="./js/mobile-app.js"></script>
+</body>
+</html>
